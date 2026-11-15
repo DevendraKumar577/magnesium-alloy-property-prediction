@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -116,6 +115,206 @@ div[data-testid="stAlert"] {
     font-weight: 700;
     letter-spacing: 2px;
     margin-bottom: 12px;
+}
+
+  
+
+
+/* CENTER ALIGNED PREDICTION CARDS */
+
+div[data-testid="stMetric"] {
+    background: #FFFFFF;
+    border: 1px solid #DCE5F0;
+    border-radius: 16px;
+    padding: 28px 20px;
+    min-height: 180px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(25, 59, 99, 0.06);
+}
+
+/* CENTER HEADING */
+div[data-testid="stMetricLabel"] {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 19px !important;
+    font-weight: 600 !important;
+    color: #526780 !important;
+}
+
+/* CENTER VALUE */
+div[data-testid="stMetricValue"] {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 36px !important;
+    font-weight: 800 !important;
+    color: #193B63 !important;
+    line-height: 1.4 !important;
+}
+
+/* CENTER UNIT */
+div[data-testid="stMetric"] [data-testid="stMetricDelta"] {
+    justify-content: center;
+}
+
+/* HOVER EFFECT */
+div[data-testid="stMetric"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(25, 59, 99, 0.11);
+    border-color: #A9C5E5;
+    transition: 0.25s ease;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+    div[data-testid="stMetric"] {
+        padding: 18px;
+        min-height: 140px;
+    }
+
+    div[data-testid="stMetricValue"] {
+        font-size: 27px !important;
+    }
+}
+
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    div[data-testid="stMetric"] {
+        padding: 18px;
+        min-height: 125px;
+    }
+
+    div[data-testid="stMetricValue"] {
+        font-size: 24px !important;
+    }
+}
+
+
+/* FINAL METRIC CARD ALIGNMENT FIX */
+
+div[data-testid="stMetric"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    min-height: 180px !important;
+    padding: 25px 15px !important;
+}
+
+/* Center all inner content */
+div[data-testid="stMetric"] > div {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+/* Metric Heading */
+div[data-testid="stMetricLabel"] {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+div[data-testid="stMetricLabel"] p {
+    font-size: 21px !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+
+/* Metric Value */
+div[data-testid="stMetricValue"] {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+div[data-testid="stMetricValue"] * {
+    font-size: 40px !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    justify-content: center !important;
+}
+
+/* Unit and Supporting Text */
+div[data-testid="stMetric"] p {
+    text-align: center !important;
+}
+
+/* Hover */
+div[data-testid="stMetric"]:hover {
+    transform: translateY(-3px);
+    transition: 0.25s ease;
+}
+
+
+/* FORCE CENTER ALIGNMENT OF ALL METRIC CONTENT */
+
+div[data-testid="stMetric"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    min-height: 190px !important;
+    padding: 25px !important;
+}
+
+/* Center every inner element */
+div[data-testid="stMetric"] * {
+    text-align: center !important;
+}
+
+/* Metric Label */
+div[data-testid="stMetric"] [data-testid="stMetricLabel"] {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 23px !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px !important;
+}
+
+div[data-testid="stMetric"] [data-testid="stMetricLabel"] p {
+    font-size: 23px !important;
+    font-weight: 700 !important;
+    width: 100% !important;
+}
+
+/* Metric Value */
+div[data-testid="stMetric"] [data-testid="stMetricValue"] {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 42px !important;
+    font-weight: 800 !important;
+}
+
+div[data-testid="stMetric"] [data-testid="stMetricValue"] * {
+    font-size: 42px !important;
+    font-weight: 800 !important;
+}
+
+/* Metric Supporting Text */
+div[data-testid="stMetric"] small {
+    font-size: 17px !important;
+    text-align: center !important;
 }
 
 
@@ -335,6 +534,49 @@ if st.button("Predict Mechanical Properties", type="primary"):
         font-size: 13px;
         margin-top: 5px;
     }
+
+
+   
+/* CENTER ALIGNMENT - MECHANICAL PROPERTY BOXES */
+
+.property-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    min-height: 165px !important;
+    padding: 25px !important;
+}
+
+/* Property Heading */
+.property-label {
+    width: 100% !important;
+    text-align: center !important;
+    font-size: 19px !important;
+    font-weight: 600 !important;
+    margin-bottom: 15px !important;
+}
+
+/* Property Value */
+.property-value {
+    width: 100% !important;
+    text-align: center !important;
+    font-size: 38px !important;
+    font-weight: 800 !important;
+    color: #15365B !important;
+    margin-bottom: 8px !important;
+}
+
+/* Property Unit */
+.property-unit {
+    width: 100% !important;
+    text-align: center !important;
+    font-size: 17px !important;
+    margin-top: 5px !important;
+}
+ 
+
     </style>
     """, unsafe_allow_html=True)
 
