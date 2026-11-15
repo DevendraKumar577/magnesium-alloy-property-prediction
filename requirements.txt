@@ -1,7 +1,10 @@
 streamlit
 pandas
-numpy
-joblib
-scikit-learn
+numpy==2.3.5
+scikit-learn==1.8.0
+joblib==1.5.3
+matplotlib
+seaborn
 plotly
 openpyxl
+
