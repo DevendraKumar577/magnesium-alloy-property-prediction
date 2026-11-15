@@ -119,7 +119,3 @@ The primary objective is to demonstrate how Machine Learning can support mechani
 B.Tech – Materials & Metallurgical Engineering
 
 Maulana Azad National Institute of Technology (MANIT), Bhopal
-
----
-
-⭐ If you find this project interesting, consider giving the repository a star!
