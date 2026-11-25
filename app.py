@@ -804,3 +804,137 @@ if st.button("Predict Mechanical Properties", type="primary"):
         "Predictions use a synthetic demonstration dataset "
         "and require experimental validation."
     )
+
+    st.divider()
+
+    st.subheader("Mechanical Properties Across Y Concentration")
+    st.caption(
+        "Individual predicted property trends across 0–8 wt.% Y "
+        "(with Zn = 1.00 wt.% and Zr = 0.50 wt.% fixed). "
+        "Generated from synthetic demonstration models."
+    )
+
+    property_configs = [
+        {
+            "col": "Tensile_UTS_MPa_SYNTHETIC",
+            "title": "Tensile Strength vs. Y Concentration",
+            "y_label": "Tensile Strength (MPa)",
+            "unit": "MPa",
+            "color": "#1769AA",
+            "is_scientific": False
+        },
+        {
+            "col": "Fatigue_Strength_MPa_SYNTHETIC",
+            "title": "Fatigue Strength vs. Y Concentration",
+            "y_label": "Fatigue Strength (MPa)",
+            "unit": "MPa",
+            "color": "#0284C7",
+            "is_scientific": False
+        },
+        {
+            "col": "Compressive_Strength_MPa_SYNTHETIC",
+            "title": "Compressive Strength vs. Y Concentration",
+            "y_label": "Compressive Strength (MPa)",
+            "unit": "MPa",
+            "color": "#1E40AF",
+            "is_scientific": False
+        },
+        {
+            "col": "Creep_Rate_s-1_SYNTHETIC",
+            "title": "Creep Rate vs. Y Concentration",
+            "y_label": "Creep Rate (s⁻¹)",
+            "unit": "s⁻¹",
+            "color": "#DC2626",
+            "is_scientific": True
+        },
+        {
+            "col": "Hardness_HV_SYNTHETIC",
+            "title": "Hardness vs. Y Concentration",
+            "y_label": "Hardness (HV)",
+            "unit": "HV",
+            "color": "#0D9488",
+            "is_scientific": False
+        }
+    ]
+
+    for i in range(0, len(property_configs), 2):
+        cols = st.columns(2)
+        for j in range(2):
+            if i + j < len(property_configs):
+                cfg = property_configs[i + j]
+                col_name = cfg["col"]
+
+                prop_fig = go.Figure()
+
+                # Trend curve across 0-8 wt.% Y
+                hover_fmt = (
+                    f"Y Concentration: %{{x:.2f}} wt.%<br>"
+                    f"{cfg['y_label']}: %{{y:.3e}}"
+                    "<extra></extra>"
+                    if cfg["is_scientific"]
+                    else
+                    f"Y Concentration: %{{x:.2f}} wt.%<br>"
+                    f"{cfg['y_label']}: %{{y:.2f}}"
+                    "<extra></extra>"
+                )
+
+                prop_fig.add_trace(go.Scatter(
+                    x=chart_df["Y_wt_pct"],
+                    y=chart_df[col_name],
+                    mode="lines",
+                    name="Predicted Trend",
+                    line=dict(color=cfg["color"], width=3),
+                    hovertemplate=hover_fmt
+                ))
+
+                # Current composition marker
+                current_hover_fmt = (
+                    f"Current Y: %{{x:.2f}} wt.%<br>"
+                    f"Predicted: %{{y:.3e}}"
+                    "<extra></extra>"
+                    if cfg["is_scientific"]
+                    else
+                    f"Current Y: %{{x:.2f}} wt.%<br>"
+                    f"Predicted: %{{y:.2f}}"
+                    "<extra></extra>"
+                )
+
+                prop_fig.add_trace(go.Scatter(
+                    x=[current_point["Y_wt_pct"]],
+                    y=[current_point[col_name]],
+                    mode="markers",
+                    name="Current Composition",
+                    marker=dict(
+                        color="#F59E0B",
+                        size=12,
+                        line=dict(color="white", width=2)
+                    ),
+                    hovertemplate=current_hover_fmt
+                ))
+
+                prop_fig.update_layout(
+                    title=cfg["title"],
+                    xaxis_title="Y Concentration (wt.%)",
+                    yaxis_title=cfg["y_label"],
+                    template="plotly_white",
+                    height=380,
+                    hovermode="x unified",
+                    legend=dict(
+                        orientation="h",
+                        yanchor="bottom",
+                        y=1.02,
+                        xanchor="right",
+                        x=1
+                    ),
+                    margin=dict(l=20, r=20, t=75, b=40)
+                )
+
+                prop_fig.update_xaxes(showgrid=True, gridcolor="#E5E7EB")
+                prop_fig.update_yaxes(
+                    showgrid=True,
+                    gridcolor="#E5E7EB",
+                    exponentformat="e" if cfg["is_scientific"] else "none"
+                )
+
+                with cols[j]:
+                    st.plotly_chart(prop_fig, use_container_width=True)
